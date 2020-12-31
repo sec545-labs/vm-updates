@@ -1,0 +1,10 @@
+[Unit]
+Description='Runs update-wiki every day and on vm boot'
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=1d 
+
+[Install]
+WantedBy=timers.target
+

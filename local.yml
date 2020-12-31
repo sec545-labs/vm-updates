@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  connection: local
+  become: true
+  gather_facts: yes
+
+  tasks:
+    - include: tasks/field-maintenance.yml
+    - include: tasks/get-version.yml
+
+    - name: 'version F : updates'
+      block:
+        - include: tasks/lab-aws-eks.yml
+      when: vm_version in ['F02', 'F03', 'F04']
+

@@ -1,0 +1,34 @@
+---
+- name: 'aws-eks : install eksctl'
+  ansible.builtin.unarchive:
+    src: https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_Linux_amd64.tar.gz
+    dest: /usr/local/bin
+    remote_src: yes
+    owner: student
+    group: student
+
+- name: 'aws-eks : install kubectl'
+  ansible.builtin.get_url:
+    url: https://amazon-eks.s3.us-west-2.amazonaws.com/1.18.9/2020-11-02/bin/linux/amd64/kubectl
+    dest: /usr/local/bin/kubectl
+    owner: student
+    group: student
+    mode: 0755
+
+- name: 'aws-eks : download helm'
+  ansible.builtin.unarchive:
+    src: https://get.helm.sh/helm-v3.4.2-linux-amd64.tar.gz
+    dest: /var/tmp/
+    remote_src: yes
+    owner: student
+    group: student
+
+- name: 'aws-eks : install helm'
+  ansible.builtin.copy:
+    src: /var/tmp/linux-amd64/helm
+    dest: /usr/local/bin/helm
+    remote_src: yes
+    owner: student
+    group: student
+    mode: 0755
+

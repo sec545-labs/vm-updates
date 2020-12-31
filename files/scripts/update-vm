@@ -1,0 +1,4 @@
+#!/bin/bash
+
+/usr/bin/ansible-pull -U https://github.com/sec545-labs/vm-updates.git --purge 2>&1 >> /root/.ansible/pull.log
+

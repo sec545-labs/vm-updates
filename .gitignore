@@ -1,0 +1,10 @@
+# macOS
+**/.DS_Store
+**/*.swp
+.Spotlight-V100
+.DocumentRevisions-V100
+
+# Python
+*.py[cod]
+__pycache__
+

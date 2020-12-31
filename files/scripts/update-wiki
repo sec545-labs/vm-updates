@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Change directory to where wiki and lab files reside
+cd ~student/.sec545-labs
+
+# Pull new files from Git Repository
+echo -e "\e[32mUpdating Wiki files\e[0m"
+/usr/sbin/runuser -u student -- /usr/bin/git pull --all
+
+# rsync over the existing files deleting anything that was removed
+/usr/sbin/runuser -u student -- /usr/bin/rsync -a --delete-after /home/student/.sec545-labs/labs/ /home/student/labs
+/usr/sbin/runuser -u student -- /usr/bin/rsync -a --delete-after /home/student/.sec545-labs/wiki/ /home/student/Public/wiki
+
+# Ensure SELinux labels are re-applied
+/usr/sbin/runuser -u student -- /usr/sbin/restorecon -R /home/student/Public/wiki 2>/dev/null
+
+echo ""
+

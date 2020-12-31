@@ -1,0 +1,16 @@
+#!/bin/bash
+# Determine version of VM
+
+if [ -d ~student/.sec545-labs ]; then
+  cd ~student/.sec545-labs
+  VERSION=$(
+    /usr/bin/git remote get-url --push origin |
+    /usr/bin/cut -d/ -f 2 |
+    /usr/bin/sed 's/\.git//'
+  )
+  echo $VERSION
+else
+  VERSION=F02
+  echo $VERSION
+fi
+

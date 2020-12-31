@@ -1,0 +1,44 @@
+---
+- name: 'field-maintenance : ensure /root/bin exists'
+  ansible.builtin.file:
+    state: directory
+    path: /root/bin
+    mode: 0750
+
+- name: 'field-maintenance : copy field-maintenance scripts'
+  ansible.builtin.copy:
+    src: files/scripts/{{ item }}
+    dest: /root/bin/{{ item }}
+    mode: 0750
+  with_items:
+    - 'get-version'
+    - 'update-vm'
+    - 'update-wiki'
+
+- name: 'field-maintenance : copy systemd service and timer units' 
+  ansible.builtin.copy:
+    src: files/systemd/{{ item }}
+    dest: /etc/systemd/system/{{ item }}
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - 'ansible-pull.service'
+    - 'ansible-pull.timer'
+    - 'update-wiki.service'
+    - 'update-wiki.timer'
+
+- name: 'field-maintenance : enable ansible-pull timer' 
+  ansible.builtin.systemd:
+    name: 'ansible-pull.timer'
+    daemon_reload: yes
+    enabled: yes
+    masked: no
+
+- name: 'field-maintenance : enable update-wiki timer' 
+  ansible.builtin.systemd:
+    name: 'update-wiki.timer'
+    daemon_reload: yes
+    enabled: yes
+    masked: no
+

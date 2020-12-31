@@ -1,0 +1,10 @@
+[Unit]
+Description='Runs ansible-pull daily and on vm boot'
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=1d 
+
+[Install]
+WantedBy=timers.target
+
