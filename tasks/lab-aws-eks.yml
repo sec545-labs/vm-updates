@@ -15,6 +15,10 @@
     group: student
     mode: 0755
 
+- name: 'aws-eks: install kubectl bash autocompletion'
+  shell: |
+    kubectl completion bash > /etc/bash_completion.d/kubectl
+
 - name: 'aws-eks : download helm'
   ansible.builtin.unarchive:
     src: https://get.helm.sh/helm-v3.4.2-linux-amd64.tar.gz
