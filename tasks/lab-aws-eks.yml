@@ -17,7 +17,7 @@
 
 - name: 'aws-eks: install kubectl bash autocompletion'
   shell: |
-    kubectl completion bash > /etc/bash_completion.d/kubectl
+    /usr/local/bin/kubectl completion bash > /etc/bash_completion.d/kubectl
 
 - name: 'aws-eks : download helm'
   ansible.builtin.unarchive:
